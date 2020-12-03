@@ -55,4 +55,14 @@ app.delete('/message/:id', (req, res) => {
     return res.status(422).send(errorMessage('Unprocessable Entity'))
 })
 
+app.patch('/message/:id', (req, res) => {
+  if(req.params.id && req.body.data) {
+    data = [...data.filter(d => d.id != req.params.id), req.body.data ];
+    console.log(data)
+    return res.status(200).send(successMessage('Update message success', req.body.data))
+  }  
+
+  return res.status(422).send(errorMessage('Unprocessable Entity'))
+})
+
 app.listen(3000, () => console.log('Server ready'))
